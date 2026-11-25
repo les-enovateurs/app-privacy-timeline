@@ -3,9 +3,9 @@
 from __future__ import annotations
 
 import argparse
-import importlib.util
 import json
 import sys
+from importlib.metadata import entry_points
 from pathlib import Path
 
 from . import (analyze, backfill_exodus, backfill_git, candidates, catalog, corpus,
@@ -13,21 +13,25 @@ from . import (analyze, backfill_exodus, backfill_git, candidates, catalog, corp
                publish, render, runreport, signatures, store, xapk)
 from .models import Snapshot
 
-ROOT = Path(__file__).resolve().parents[2]
+# Data (corpus, snapshots, caches) lives in the directory the command runs from, so a
+# separate data repository can use this package as a dependency. Reference files that
+# ship with the code are read from the checkout.
+ROOT = Path.cwd()
+CODE_ROOT = Path(__file__).resolve().parents[2]
 CORPUS_PATH = ROOT / "corpus.json"
 SNAPSHOT_ROOT = ROOT / "snapshots"
 DELTA_ROOT = ROOT / "deltas"
 RUNS_ROOT = ROOT / "runs"
 CACHE_ROOT = ROOT / "cache"
 SIGNATURES_PATH = ROOT / "signatures" / "trackers.json"
-ALLOWLIST_PATH = ROOT / "signatures" / "allowlist.txt"
-HOST_CLASSES_PATH = ROOT / "signatures" / "host-classes.txt"
-CORRECTIONS_PATH = ROOT / "signatures" / "corrections.json"
+ALLOWLIST_PATH = CODE_ROOT / "signatures" / "allowlist.txt"
+HOST_CLASSES_PATH = CODE_ROOT / "signatures" / "host-classes.txt"
+CORRECTIONS_PATH = CODE_ROOT / "signatures" / "corrections.json"
 EVIDENCE_ROOT = ROOT / "evidence"
 CANDIDATES_PATH = ROOT / "candidates.json"
 ENDPOINTS_PATH = ROOT / "endpoints.json"
 KEYS_PATH = ROOT / "keys.json"
-SCHEMA_PATH = ROOT / "schema" / "snapshot.schema.json"
+SCHEMA_PATH = CODE_ROOT / "schema" / "snapshot.schema.json"
 DIST_ROOT = ROOT / "dist"
 PUBLIC_ROOT = ROOT / "dist-public"
 DEFAULT_SITE_REPO = Path("../reboot")
@@ -1214,10 +1218,9 @@ def build_parser() -> argparse.ArgumentParser:
     _scope(p_diff)
     p_diff.set_defaults(func=cmd_diff)
 
-    # Downloading stays in the private repository; the public one has no such module.
-    if importlib.util.find_spec(".download", __package__):
-        from . import download
-        download.register(sub)
+    # Extra commands from other installed packages, e.g. a private download step.
+    for extension in entry_points(group="apklab.commands"):
+        extension.load()(sub)
 
     p_an = sub.add_parser("analyze", help="analyser un APK ou un XAPK déposé à la main")
     p_an.add_argument("apk", help="chemin du fichier .apk ou .xapk")

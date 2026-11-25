@@ -84,7 +84,7 @@ to prove presence and see rotation between versions, not enough to use the key.
 
 ## Contributing
 
-Conventions are in `CLAUDE.md`: English code, short comments that say *why*, one test
+Conventions are in `CONTRIBUTING.md`: English code, short comments that say *why*, one test
 per behaviour, external binaries and network injected and never touched by the suite.
 
 ## Licence

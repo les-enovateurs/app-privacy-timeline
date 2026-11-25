@@ -1,4 +1,4 @@
-# Conventions
+# Contributing
 
 ## Language
 
@@ -34,7 +34,7 @@ Open-source expectations — someone reads this without knowing the project:
 
 - Obvious names over clever ones. No abbreviations that aren't universal.
 - Pure functions where the work is a transformation; impure boundaries thin and named
-  (`gitlog`/`backfill_git`, `apkeep`/`analyze`).
+  (`gitlog`/`backfill_git`, `exodusweb`/`backfill_exodus`).
 - Every rejection is recorded, never silent. An absence that reads as a fact is the
   failure mode this project exists to avoid.
 - No command writes without `--write`.
@@ -46,8 +46,12 @@ Open-source expectations — someone reads this without knowing the project:
 
 External binaries and network are injected, never touched by the suite.
 
+## Data and extensions
+
+Data (corpus, snapshots, caches) is read from the current directory; reference files
+(`signatures/*.txt`, `corrections.json`, `schema/`) from this checkout. Other packages can
+add subcommands through the `apklab.commands` entry point.
+
 ## Secrets
 
-`.env` at the repo root, gitignored. Never a token in argv typed by hand, in a run
-report, or in a fixture. `apkeep._trace` redacts `aas_et/…` and `oauth2_4/…` on the way
-out.
+Never a token in argv typed by hand, in a run report, or in a fixture.

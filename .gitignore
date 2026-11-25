@@ -30,3 +30,7 @@ dist-public/
 # durable au compte : il ne se versionne pas, et il se révoque depuis les paramètres
 # du compte Google si jamais il fuit.
 .env
+
+# Local assistant instructions
+CLAUDE.md
+.claude/
