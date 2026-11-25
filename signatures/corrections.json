@@ -1,0 +1,32 @@
+{
+ "_pourquoi": "Corrections locales du catalogue Exodus, appliquées à la lecture. Une correction ne peut qu'ÉTENDRE une signature existante : la signature d'origine doit rester textuellement dans la corrigée, sinon `signatures.apply_corrections` refuse le fichier. Chaque entrée porte son motif et l'endroit où le nouveau nom a été mesuré, pour qu'on sache laquelle jeter quand Exodus aura corrigé de son côté — et quoi leur signaler.",
+ "corrections": [
+  {
+   "id": 17,
+   "name": "Braze (formerly Appboy)",
+   "upstream_signature": "com.appboy",
+   "code_signature": "com.appboy|com\\.braze\\.|bo\\.app\\.",
+   "why": "Appboy est devenu Braze en 2017 et le SDK a été renommé. La signature d'Exodus ne cherche plus que l'ancien nom : trois applications du corpus embarquent `com.braze` sans qu'aucune ne soit comptée. `bo.app` est le package interne du SDK, présent dans les mêmes binaires.",
+   "observed_in": ["com.comuto 6.29.1", "com.grindrapp.android 26.15.1", "fr.vinted 26.34.1"],
+   "measured_at": "2026-09-10"
+  },
+  {
+   "id": 169,
+   "name": "Vungle",
+   "upstream_signature": "com.vungle.publisher.|com.vungle.warren.",
+   "code_signature": "com.vungle.publisher.|com.vungle.warren.|com\\.vungle\\.",
+   "why": "Vungle (Liftoff) a remplacé `com.vungle.warren` par `com.vungle.ads` à partir du SDK 7. Les deux anciens préfixes ne trouvent plus rien, et trois applications du corpus embarquent le nouveau. Le préfixe retenu est `com.vungle.` et non `com.vungle.ads.` : les adaptateurs de médiation (`com.vungle.mediation`) sont du code Vungle tout autant, et les laisser dehors produirait un candidat de plus pour le même éditeur.",
+   "observed_in": ["com.comuto 6.29.1", "com.grindrapp.android 26.15.1", "fr.vinted 26.34.1"],
+   "measured_at": "2026-09-10"
+  },
+  {
+   "id": 206,
+   "name": "Instabug",
+   "upstream_signature": "com.instabug.",
+   "code_signature": "com.instabug.|ai\\.luciq\\.",
+   "why": "Instabug a été renommé Luciq, et son SDK est passé de `com.instabug` à `ai.luciq`. La filiation se lit dans les binaires : les neuf modules d'Instabug relevés dans Reddit 2024.17.0 (`all`, `apm`, `bug`, `chat`, `crash`, `fatalhangs`, `featuresrequest`, `library`, `survey`) se retrouvent tous sous `ai.luciq`. Deux applications du corpus embarquent le nouveau nom et aucune n'était comptée ; `sessionreplay` et `screenrecording` y figurent.",
+   "observed_in": ["com.paypal.android.p2pmobile 10.12.0", "com.ticketmaster.mobile.android.na 301.0"],
+   "measured_at": "2026-09-23"
+  }
+ ]
+}

@@ -1,0 +1,230 @@
+# Bibliothèques bénignes — préfixes soustraits des candidats trackers (sous-projet C).
+#
+# Cette liste décide à elle seule du taux de faux positifs de `apklab candidates`, et
+# elle se cure à la main. Deux erreurs possibles, pas symétriques :
+#   — un préfixe manquant produit du bruit, qu'on voit et qu'on corrige en une ligne ;
+#   — un préfixe de trop cache un pisteur pour toujours, sans que rien ne le signale.
+# En cas de doute, ne pas ajouter. Un préfixe large — `com.google` — est donc interdit
+# ici : la moitié des pisteurs du catalogue Exodus vivent sous des préfixes Google.
+#
+# La comparaison porte sur les labels entiers : `androidx` couvre `androidx.core` mais
+# jamais `androidxyz`.
+
+# plateforme et langage
+android
+androidx
+com.android
+dalvik
+java
+javax
+kotlin
+kotlinx
+sun
+org.w3c
+org.xml
+org.xmlpull
+org.intellij
+org.jetbrains
+
+# réseau et sérialisation
+okhttp3
+okio
+retrofit2
+com.squareup.moshi
+com.squareup.okhttp
+com.squareup.wire
+org.json
+com.fasterxml.jackson
+kotlinx.serialization
+
+# UI, images, injection, réactif
+com.bumptech.glide
+com.airbnb.lottie
+coil
+coil3
+io.reactivex
+rx
+dagger
+javax.inject
+com.google.android.material
+com.google.android.exoplayer2
+androidx.media3
+
+# utilitaires Google non traçants
+com.google.gson
+com.google.common
+com.google.protobuf
+com.google.errorprone
+com.google.thirdparty
+com.google.zxing
+com.google.j2objc
+com.google.auto
+
+# divers fondations
+org.apache
+org.slf4j
+org.threeten
+org.checkerframework
+org.reactivestreams
+org.koin
+org.kodein
+net.sqlcipher
+io.grpc
+com.jakewharton.disklrucache
+
+# Ajouts du 2026-09-10, après la première passe sur onze applications : ces préfixes
+# remontaient dans les vingt premiers candidats par prévalence, et aucun ne fait de
+# télémétrie. Les internes de Play Services, eux, n'y sont volontairement pas — ils
+# attendent un jugement humain, pas un préfixe glissé dans une liste.
+org.bouncycastle
+org.chromium
+net.openid.appauth
+com.squareup.picasso
+com.google.accompanist
+_COROUTINE
+com.google.crypto.tink
+com.google.android.flexbox
+com.caverock.androidsvg
+org.brotli
+timber.log
+j$
+
+# Signé le 2026-09-10 : bibliothèques techniques sans collecte propre,
+# sorties du tri des 501 candidats (lot R3).
+app.cash
+app.rive
+bolts
+cl.json
+co.touchlab
+com.ReactNativeBlobUtil
+com.abovevacant
+com.airbnb
+com.canhub
+com.github
+com.horcrux
+com.imagepicker
+com.jakewharton
+com.journeyapps
+com.launchdarkly
+com.learnium
+com.lyft
+com.mapbox
+com.nimbusds
+com.oblador
+com.reactnativecommunity
+com.reactnativedocumentpicker
+com.sun
+com.swmansion
+com.th3rdwave
+com.uber
+com.yalantis
+com.zoontek
+curtains
+io.invertase
+io.jsonwebtoken
+io.ktor
+io.michaelrocks
+io.noties
+io.opentracing
+io.realm
+jakarta.inject
+jp.wasabeef
+lib.android
+me.leolin
+net.danlew
+nl.dionsegijn
+org.bson
+org.commonmark
+org.greenrobot
+org.joda
+org.jsoup
+org.jspecify
+org.junit
+org.yaml
+pl.droidsonroids
+se.ansman
+
+# Signé le 2026-09-14 : bibliothèques techniques sans collecte propre — lot R4 du
+# tri des 11 957. Ce qui a décidé le lot est une mesure et non une impression : aucun
+# des 253 packages n'est corrélé à un endpoint du binaire. Zéro sur 253.
+#
+# Deux absences volontaires, pour qui curera cette liste plus tard :
+#   — `expo` a tout d'un R4 (142 sous-packages, un runtime multiplateforme) mais corrèle
+#     `expo.dev`, et `expo.modules.easclient` et `expo.modules.updates` contactent les
+#     serveurs EAS avec un identifiant de client. Un préfixe n'a pas d'exception : il les
+#     aurait couverts en silence. Expo reste une question dans candidates.json ;
+#   — `com.squareup` en bloc couvrirait les SDK de paiement de Square. Les six
+#     sous-packages trouvés sont donc listés un par un.
+arrow
+ch.qos
+com.apollographql
+com.benasher44.uuid
+com.fasterxml.uuid
+com.googlecode.mp4parser
+com.goterl
+com.mp4parser
+com.nineoldandroids
+com.pichillilorenzo
+com.russhwolf.settings
+com.squareup.javapoet
+com.squareup.otto
+com.squareup.seismic
+com.squareup.tape2
+com.squareup.workflow1
+com.squareup.zstd
+dev.fluttercommunity
+exoplayer2.av1
+internal.org.chromium
+internal.org.jni_zero
+io.flutter
+io.perfmark
+io.reactivexport
+io.requery
+junit
+leakcanary
+net.bytebuddy
+net.jcip
+net.minidev
+net.time4j
+net.zetetic
+okhttp.okhttp3
+org.aomedia
+org.apmem
+org.aspectj
+org.codehaus
+org.conscrypt
+org.fmod
+org.hamcrest
+org.jacoco
+org.java_websocket
+org.jctools
+org.jni_zero
+org.linusu
+org.maplibre
+org.mockito
+org.mp4parser
+org.msgpack
+org.objectweb
+org.objenesis
+org.opencv
+org.reactivestreamsport
+org.scilab
+org.spongycastle
+org.sqlite
+org.tukaani
+org.webrtc
+org.xbill
+qrcode
+radiography
+third_party.libavif
+tvo.webrtc
+
+# Signé le 2026-09-14 : résidus de build — lot R5. Ponts Xamarin/Mono et .NET,
+# code généré par Dagger Hilt, résidu de l'optimiseur Redex. Les ponts `crc64…`
+# du même lot ne sont pas ici : leur nom change à chaque build, ils sont écartés
+# par forme dans `candidates.obfusque`.
+hilt_aggregated_deps
+mono
+net.dot
+redex
+xamarin

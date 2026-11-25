@@ -1,0 +1,32 @@
+cache/
+runs/
+__pycache__/
+.venv/
+*.apk
+*.xapk
+# Exception : l'APK de test est FOSS, minuscule et sous licence permissive.
+# La règle « aucun APK versionné » vise la redistribution de binaires tiers,
+# pas une fixture de 46 Ko dont la licence autorise explicitement la copie.
+!tests/fixtures/apk/*.apk
+*.egg-info/
+.pytest_cache/
+# Le dataset dérivé : 5 Mo pour 130 applications, et rien dedans qui ne vienne d'un
+# fichier versionné — le store, endpoints.json, keys.json, candidates.json. `apklab
+# export --all --write` le refait en une seconde, sans réseau ni binaire. Le versionner
+# ferait bouger 130 fichiers à chaque passe pour une information déjà dans le dépôt.
+dist/
+# Les preuves du sous-projet C : 1,4 Mo par application — 180 Mo sur le corpus complet.
+# Dérivées d'un binaire qu'on ne garde pas non plus, donc pas reconstructibles depuis le
+# dépôt ; ce qu'un tri manuel doit lire est recopié dans candidates.json, qui est versionné.
+evidence/
+
+# La projection publique. Comme `dist/`, tout ce qu'elle contient vient d'un fichier
+# versionné et `apklab publish --all --write` la refait en une seconde. Elle n'est ni
+# plus ni moins publiable versionnée ici : ce qui la publie est la dépose sur le
+# serveur, et la versionner ferait deux endroits où lire ce qui a traversé.
+dist-public/
+
+# Identifiants Google Play pour `apkeep -d google-play`. Un AAS token vaut un accès
+# durable au compte : il ne se versionne pas, et il se révoque depuis les paramètres
+# du compte Google si jamais il fuit.
+.env

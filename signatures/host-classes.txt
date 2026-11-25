@@ -1,0 +1,173 @@
+# Classement manuel des hôtes que les règles structurelles ne tranchent pas.
+#
+#   <classe> <hôte>        classe cet hôte exactement
+#   <classe> .<suffixe>    classe l'hôte et tous ses sous-domaines
+#
+# Classes : endpoint, doc, placeholder, code, invalid — cf. src/apklab/endpoints.py.
+# L'hôte exact gagne sur le suffixe. Les règles structurelles gagnent sur ce fichier :
+# rien ici ne peut déclarer endpoint ce qui n'est pas un hôte.
+#
+# Curé à la main sur les 730 hôtes distincts des onze premières applications analysées,
+# le 2026-09-10. Incomplet par construction : chaque passe en ajoute.
+
+# ---------------------------------------------------------------- doc
+# Domaines réels que l'application ne contacte pas : espaces de noms XML, portails de
+# documentation, consoles d'éditeur, suivis d'issues. Ils viennent des chaînes de
+# bibliothèques XML et des commentaires compilés, jamais d'un appel réseau.
+doc .w3.org
+doc xml.org
+doc xmlpull.org
+doc .apache.org
+doc apache.org
+doc purl.org
+doc iptc.org
+doc .oasis-open.org
+doc ns.adobe.com
+doc ns.useplus.org
+doc dashif.org
+doc aomedia.org
+doc schemas.android.com
+doc schemas.microsoft.com
+doc schemas.openxmlformats.org
+doc schemas.applovin.com
+doc developer.apple.com
+doc developers.google.com
+doc developer.mozilla.org
+doc issuetracker.google.com
+doc console.firebase.google.com
+doc support.google.com
+doc docs.google.com
+doc docs.sentry.io
+doc market.android.com
+doc www.android.com
+doc type.googleapis.com
+doc github.com
+doc www.oracle.com
+doc www.bouncycastle.org
+doc www.slf4j.org
+doc www.jivesoftware.org
+doc www.jivesoftware.com
+doc igniterealtime.org
+doc jabber.org
+doc etherx.jabber.org
+doc www.w3schools.com
+doc dlv.isc.org
+doc root-servers.net
+doc experiencecloud.org
+doc iabeurope.eu
+doc compliance.iabtechnologylab.com
+doc seal.verisign.com
+doc grindr.atlassian.net
+doc www.mozilla.org
+doc wikipedia.org
+
+# ---------------------------------------------------------------- placeholder
+# Gabarits d'exemple et endpoints de test laissés dans le binaire. Les labels
+# `example`, `dummy`, `fake`, `test`, `mock`, `whatever`, `toto` sont déjà reconnus par
+# la structure ; seuls les autres sont listés ici.
+placeholder .pstmn.io
+placeholder api.mocki.io
+placeholder obplaceholder.click.com
+placeholder email.com
+placeholder www.dom.com
+placeholder debug.block-domain.com
+placeholder debug.report-domain.com
+placeholder .8-lives-cat.io
+placeholder x.thecatmachine.com
+placeholder cdn.pixabay.com
+placeholder images.unsplash.com
+placeholder upload.wikimedia.org
+
+# ---------------------------------------------------------------- code
+# Du code pris pour un hôte sous un TLD fort, que la règle du TLD faible ne rattrape
+# donc pas. Les identifiants sous `.id`, `.app`, `.io`, `.info` — `user.id`,
+# `dispatchers.io`, `filled.info` — sortent déjà en `code` par défaut.
+code ro.build.display.id
+code ro.vivo.os.build.display.id
+code iamcache.braze
+code long.open.weixin.qq.com
+code open.weixin.qq.com
+
+# ---------------------------------------------------------------- endpoint
+# Vrais endpoints sous TLD faible, qui sortiraient en `code` sans cette déclaration.
+# C'est la moitié utile du fichier : sans elle, Adjust, AppsFlyer, OneTrust, Screeb,
+# DataDome et Fingerprint disparaîtraient du dataset.
+endpoint adj.st
+endpoint adjust.io
+endpoint .adjust.io
+endpoint screeb.app
+endpoint .screeb.app
+endpoint 1trust.app
+endpoint .1trust.app
+endpoint onetrust.dev
+endpoint onetrust.io
+endpoint .onetrust.io
+endpoint .onelink.me
+endpoint expo.dev
+endpoint api-sdk.datadome.co
+endpoint .ckotech.co
+endpoint www.blablacar.co
+endpoint batch.io
+endpoint grindr.io
+endpoint sentry.io
+endpoint img.ly
+endpoint wa.me
+endpoint fb.gg
+endpoint support.axon.ai
+endpoint .fpjs.io
+endpoint .csq.io
+endpoint csq.io
+endpoint .confidence.dev
+endpoint relay.hubvisor.io
+endpoint insights.algolia.io
+endpoint api.bidmachine.io
+endpoint x.everestop.io
+endpoint .pangle.io
+endpoint .leboncoin.io
+endpoint a.revenue.cat
+endpoint .vinted.io
+endpoint .laposte.cloud
+endpoint .leboncoin.info
+endpoint .valiuz.io
+endpoint www.blablacar.id
+
+# Ajouts du 2026-09-10, deuxième passe (France Travail, Deliveroo, BeReal, Duolingo,
+# Flo Health) : 73 nouveaux hôtes sous TLD faible, dont ceux-ci sont de vrais endpoints.
+# Le reste de la fournée est bien du code — attributs sémantiques OpenTelemetry
+# (`span.id`, `host.cpu.model.id`, `messaging.message.id`), jetons de design
+# (`color.foreground.neutral.normal.on.app`), et la série des icônes Material.
+endpoint axon.ai
+endpoint atom-data.io
+endpoint bidmachine.io
+endpoint bm-ads.io
+endpoint liftoff.io
+endpoint liftoff-creatives.io
+endpoint chinaliftoff.io
+endpoint cloud.aditude.io
+endpoint fivecdm.io
+endpoint tenjin.io
+endpoint pangle.io
+endpoint onelink.me
+endpoint line.me
+endpoint .sentry.io
+endpoint .ably.io
+endpoint .scdn.co
+endpoint .clarium.io
+endpoint www.voodoo.io
+
+# Site d'un standard, pas un endpoint : les attributs sémantiques OpenTelemetry citent
+# leur propre domaine dans leurs constantes.
+doc opentelemetry.io
+
+# ---------------------------------------------------------------- infra
+# Hôtes réels qu'une application joint sans qu'aucun tiers y reçoive de donnée : synchro
+# d'horloge, et hôtes virtuels servis localement. Ils passent les règles structurelles
+# — ce sont de vrais noms de domaine — et gonflent le compte des « sociétés tierces »
+# d'un bruit que personne ne peut interpréter. 49 occurrences sur le corpus au 2026-09-11.
+infra .pool.ntp.org
+infra pool.ntp.org
+# `appassets.androidplatform.net` n'est contacté sur aucun réseau : WebViewAssetLoader
+# s'en sert comme origine pour servir des fichiers embarqués dans l'APK. Le publier
+# comme destinataire serait faux, pas seulement inutile.
+infra appassets.androidplatform.net
+infra .androidplatform.net

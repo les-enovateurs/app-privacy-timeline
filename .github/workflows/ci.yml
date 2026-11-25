@@ -1,0 +1,32 @@
+name: ci
+
+on:
+  push:
+  pull_request:
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v7
+      - uses: astral-sh/setup-uv@v7
+        with:
+          python-version: "3.11"
+      # setup-uv's interpreter is externally managed: `uv pip install --system` fails.
+      - run: uv sync --locked
+      - run: uv run pytest -q
+      - name: every schema field is documented
+        run: |
+          uv run python - <<'PY'
+          import json, sys
+          schema = json.load(open("schema/snapshot.schema.json"))
+          missing = [k for k, v in schema["properties"].items() if not v.get("description")]
+          if missing:
+              sys.exit(f"fields without description: {missing}")
+          PY
+      - name: no binary committed
+        run: |
+          # The F-Droid fixture (46 KB, Apache-2.0) is the only allowed APK.
+          hits=$(git ls-files '*.apk' '*.xapk' '*.aab' \
+                 | grep -v '^tests/fixtures/apk/[^/]*\.apk$' || true)
+          if [ -n "$hits" ]; then echo "binary committed: $hits"; exit 1; fi

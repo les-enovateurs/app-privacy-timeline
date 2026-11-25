@@ -1,0 +1,146 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://github.com/les-enovateurs/unlock-my-data-apk-lab/schema/snapshot.schema.json",
+  "title": "Snapshot",
+  "description": "Un état observé d'une application à un instant donné. Une ligne de snapshots/<handle>.jsonl. Un snapshot n'est écrit que si l'empreinte change : la série est un échantillon d'observations, pas un journal exhaustif des versions publiées.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["handle", "slug", "app_name", "version_name", "source", "observed_at", "permissions", "trackers", "fingerprint"],
+  "properties": {
+    "handle": {
+      "type": "string",
+      "description": "Identifiant de paquet Android. Clé d'identité du projet : c'est lui, et non le slug UMD, qui relie une fiche du site, un rapport Exodus et un APK téléchargé.",
+      "minLength": 1
+    },
+    "slug": {
+      "type": "string",
+      "description": "Nom du fichier de fiche côté site. Conservé pour projeter les faits vers public/data/compare/<slug>.json sans avoir à rechercher le handle.",
+      "minLength": 1
+    },
+    "app_name": {
+      "type": "string",
+      "description": "Nom lisible de l'application. Vient toujours du corpus, jamais de la page de détail Exodus dont le titre peut renvoyer une référence de ressource non résolue du type @7F1400C5."
+    },
+    "version_name": {
+      "type": ["string", "null"],
+      "description": "Version telle qu'affichée à l'utilisateur. Entre dans l'empreinte : une nouvelle version au même jeu de permissions produit quand même un snapshot, ce qui rend la série de poids complète."
+    },
+    "version_code": {
+      "type": ["integer", "null"],
+      "description": "Entier monotone du manifeste. Seul ordre de version fiable ; version_name peut régresser ou changer de convention. Publié par exodus-web dans son bloc de détails techniques, absent des fiches du site donc nul pour exodus-git."
+    },
+    "source": {
+      "enum": ["apk-static", "exodus-web", "exodus-git"],
+      "description": "Chemin par lequel le fait est arrivé. exodus-git et exodus-web portent la même donnée Exodus mais pas la même confiance : exodus-git est daté du commit UMD et a pu être retouché à la main. Le tri chronologique et la dédup doivent en tenir compte."
+    },
+    "acquisition": {
+      "type": ["string", "null"],
+      "enum": ["apkpure", "google-play", "manual", null],
+      "description": "Origine du binaire analysé. Un poids issu d'un XAPK APKPure et un poids issu d'un APK unique Play ne sont pas comparables ; ce champ garde la trace de l'artefact de source."
+    },
+    "apk_sha256": {
+      "type": ["string", "null"],
+      "description": "Empreinte des octets de l'APK analysé. Rend l'étude reproductible par un tiers sans redistribuer le binaire, ce que le droit interdit. Sert aussi à écarter un re-téléchargement identique. exodus-web le publie — c'est ce qui permettra de vérifier qu'un APK téléchargé est bien le binaire qu'Exodus a analysé ; exodus-git ne le porte pas.",
+      "pattern": "^[0-9a-f]{64}$"
+    },
+    "analyzer": {
+      "type": ["string", "null"],
+      "description": "Outil qui a produit les faits. Un écart entre deux snapshots peut venir de l'analyseur et non de l'application ; sans ce champ l'écart serait attribué à tort à l'éditeur."
+    },
+    "analyzer_version": {
+      "type": ["string", "null"],
+      "description": "Version de cet outil, pour la même raison que analyzer, à la granularité qui permet de rejouer une analyse."
+    },
+    "catalog_version": {
+      "type": ["string", "null"],
+      "description": "Version de la liste de signatures Exodus au moment de l'analyse, format AAAA-MM-JJ/<nb_entrées>/sha256:<court>. Un nombre de trackers n'a de sens que relativement à un catalogue : si le catalogue grossit et qu'une app gagne un tracker, c'est peut-être le catalogue. Null signifie inconnu, pas identique."
+    },
+    "observed_at": {
+      "type": "string",
+      "format": "date-time",
+      "description": "Instant de l'observation. Pour exodus-git c'est la date du commit UMD, pas celle du scan Exodus : la donnée est plus ancienne que sa date. Borne haute de la fenêtre d'incertitude des deltas."
+    },
+    "previous_observed_at": {
+      "type": ["string", "null"],
+      "format": "date-time",
+      "description": "observed_at du snapshot précédent de la même série. Borne basse de la fenêtre d'incertitude : les runs sont manuels et irréguliers, un changement ne peut être daté, seulement encadré."
+    },
+    "report_date": {
+      "type": ["string", "null"],
+      "format": "date-time",
+      "description": "Date de création du rapport Exodus, faisant autorité pour les sources exodus-*. Écart avec observed_at = latence entre le scan Exodus et sa reprise par UMD ; nul pour exodus-web, dont l'observation est le scan lui-même. L'heure affichée par Exodus est prise pour de l'UTC, même hypothèse que le scraper du site, pour que les deux sources restent comparables."
+    },
+    "report_updated_at": {
+      "type": ["string", "null"],
+      "format": "date-time",
+      "description": "Date de re-scan d'un rapport Exodus, quand la page en annonce un. Ses pisteurs viennent alors du catalogue de ce jour-là et non de celui de la création : sans ce champ, un delta de pisteurs dû au seul rattrapage de catalogue serait imputé à l'éditeur."
+    },
+    "permissions": {
+      "type": "array",
+      "items": {"type": "string"},
+      "description": "Permissions déclarées au manifeste, triées. Lues du manifeste et non d'un catalogue : c'est la seule donnée dont les deltas restent exploitables à travers un changement de source."
+    },
+    "trackers": {
+      "type": "array",
+      "description": "Trackers détectés par les signatures Exodus. À lire toujours avec catalog_version : un delta de trackers entre deux catalogues différents ne dit rien sur l'application.",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["id", "name"],
+        "properties": {
+          "id": {"type": "integer", "description": "Identifiant Exodus, stable dans le temps, seule clé de jointure sûre."},
+          "name": {"type": ["string", "null"], "description": "Nom au catalogue courant, pour la lisibilité humaine. Nul si l'id n'est plus au catalogue."}
+        }
+      }
+    },
+    "size_scope": {
+      "type": ["string", "null"],
+      "enum": ["single-apk", "merged-xapk", "base-only", null],
+      "description": "Périmètre auquel se rapporte le poids. Le poids d'une application n'est pas un scalaire universel : les splits par ABI et par densité le font varier selon l'appareil. Sans périmètre déclaré, un +40 % peut n'être qu'un artefact de source."
+    },
+    "total_bytes": {"type": ["integer", "null"], "description": "Poids total du périmètre déclaré. Axe éco-conception, absent de toute source existante — d'où l'analyse de l'APK soi-même."},
+    "dex_bytes": {"type": ["integer", "null"], "description": "Octets de bytecode. Sépare la croissance du code de celle des ressources, deux causes de dérive à ne pas confondre."},
+    "res_bytes": {"type": ["integer", "null"], "description": "Octets de ressources compilées, pour la même séparation."},
+    "assets_bytes": {"type": ["integer", "null"], "description": "Octets d'assets bruts, souvent le poste où grossit une app sans que son code change."},
+    "native_bytes": {"type": ["integer", "null"], "description": "Octets de bibliothèques natives. Avec native_abis, porte le vrai signal éco : une app embarquant quatre ABI gaspille structurellement, indépendamment de sa croissance."},
+    "native_abis": {"type": ["array", "null"], "items": {"type": "string"}, "description": "ABI embarquées. Quatre ABI livrées à un appareil qui en utilise une seule, c'est du poids inutile par construction."},
+    "native_bytes_by_abi": {"type": ["object", "null"], "additionalProperties": {"type": "integer"}, "description": "Compressed native bytes per ABI, from lib/<abi>/ across every part. Kept so the reference size can be recomputed if the reference phone changes."},
+    "size_parts": {
+      "type": ["array", "null"],
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["name", "kind", "qualifier", "bytes", "dex_bytes", "res_bytes", "assets_bytes", "native_bytes"],
+        "properties": {
+          "name": {"type": "string"},
+          "kind": {"enum": ["base", "abi", "density", "language", "feature", "unknown"]},
+          "qualifier": {"type": ["string", "null"]},
+          "bytes": {"type": "integer"},
+          "dex_bytes": {"type": "integer"},
+          "res_bytes": {"type": "integer"},
+          "assets_bytes": {"type": "integer"},
+          "native_bytes": {"type": "integer"}
+        }
+      },
+      "description": "One entry per APK of the bundle, a single base entry for a lone APK. An unrecognised name is kept as `unknown`, never dropped."
+    },
+    "reference_bytes": {"type": ["integer", "null"], "description": "Size on a fixed arm64-v8a / xxhdpi phone. Null when the binary does not serve that phone; quality_flags says why."},
+    "dex_method_count": {"type": ["integer", "null"], "description": "Nombre de méthodes. Mesure de complexité qui survit à la minification, contrairement au poids du dex."},
+    "min_sdk": {"type": ["integer", "null"], "description": "Niveau d'API minimal. Un min_sdk qui monte exclut des appareils encore en service : obsolescence logicielle programmée, mesurable."},
+    "target_sdk": {"type": ["integer", "null"], "description": "Niveau d'API ciblé. Détermine quelles restrictions de vie privée d'Android s'appliquent réellement à l'application."},
+    "fingerprint": {
+      "type": "string",
+      "pattern": "^[0-9a-f]{64}$",
+      "description": "sha256 de version_name, permissions et trackers. Décide seul si un snapshot est écrit : sans elle, chaque run rajouterait une ligne identique et la série cesserait d'être lisible."
+    },
+    "quality_flags": {
+      "type": "array",
+      "items": {"type": "string"},
+      "description": "Défauts connus de ce snapshot, portés par la donnée plutôt que perdus dans un log. Un consommateur peut ainsi filtrer sans relire le code qui l'a produit."
+    },
+    "provenance_ref": {
+      "type": ["string", "null"],
+      "description": "Référence vers l'origine exacte du fait : sha du commit UMD pour exodus-git, id de rapport pour exodus-web. Rend chaque ligne vérifiable à la main, condition d'un usage réglementaire."
+    }
+  }
+}

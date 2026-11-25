@@ -1,0 +1,1108 @@
+
+<!doctype html>
+
+<html lang="fr">
+
+  <head>
+    
+    <link rel="stylesheet" href="/static/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/static/css/exodus.css">
+    <link rel="shortcut icon" href="/static/img/favicon.ico">
+
+    <script src="/static/js/jquery.min.js"></script>
+    <script src="/static/js/popper.min.js"></script>
+    <script src="/static/js/bootstrap.min.js"></script>
+    <script src="/static/js/handlebars.min.js"></script>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta property="og:type" content="article">
+    <meta property="og:site_name" content="εxodus">
+    <meta  property="og:image" content="http://reports.exodus-privacy.eu.org/static/img/logo_purple_without_text.png">
+    
+  
+    <meta property="og:description" content="Rapports de toutes les versions analysées de cette application">
+    <meta name="description" content="Rapports de toutes les versions analysées de cette application">
+    <meta property="og:title" content="Liste de rapports pour com.facebook.katana">
+    <title>Liste de rapports pour com.facebook.katana - εxodus</title>
+  
+
+  </head>
+
+  <body>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-primary sticky-top mb-4">
+      <div class="container">
+        <a class="navbar-brand" data-toggle="tooltip" title="εxodus v1.32.4" href="/fr/">
+          <img src="/static/img/logo_purple_small.png" width="40" height="40" class="d-inline-block align-top"
+               alt="Logo Exodus : epsilon blanc dans un cercle violet">
+          <span class="h2">εxodus</span>
+        </a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown"
+                aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNavDropdown">
+          
+          
+          
+          
+          
+          <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
+            <li class="nav-item mr-xl-3 ml-xl-3 mr-lg-2 ml-lg-2 ">
+              <a class="nav-link " href="/fr/">Accueil</a>
+            </li>
+            <li class="nav-item mr-xl-3 ml-xl-3 mr-lg-2 ml-lg-2 ">
+              <a class="nav-link " href="/fr/reports/">Rapports</a>
+            </li>
+            <li class="nav-item mr-xl-3 ml-xl-3 mr-lg-2 ml-lg-2 ">
+              <a class="nav-link " href="/fr/trackers/">Pisteurs</a>
+            </li>
+            <li class="nav-item mr-xl-3 ml-xl-3 mr-lg-2 ml-lg-2 ">
+              <a class="nav-link " href="/fr/info/understand/">Mieux comprendre</a>
+            </li>
+            <li class="nav-item mr-xl-3 ml-xl-3 mr-lg-2 ml-lg-2 ">
+              <a class="nav-link " href="/fr/info/organization/">L'association</a>
+            </li>
+            
+          </ul>
+          <form class="form-inline my-2 my-lg-0" action="/i18n/setlang/" method="post">
+            <img class="mr-3 mr-lg-2 mr-xl-3" alt="language selector" src="/static/img/langue.svg" alt="Sélectionner la langue">
+            <input type="hidden" name="csrfmiddlewaretoken" value="exkCPMOxTqnHS5t0MfP8B2JK7hl9Mic3OWfVeqTeKVpcgqaBSYpGdbnMPIzjrPuo">
+            
+              <input name="next" type="hidden" value="/reports/search/com.facebook.katana/?page=1">
+            
+            <select class="custom-select custom-select-sm" name="language"
+                    onchange='if(this.value !=  "fr") { this.form.submit(); }'>
+              
+              
+              
+              
+                <option value="cs" >
+                  česky
+                </option>
+              
+                <option value="de" >
+                  Deutsch
+                </option>
+              
+                <option value="el" >
+                  Ελληνικά
+                </option>
+              
+                <option value="en" >
+                  English
+                </option>
+              
+                <option value="es" >
+                  español
+                </option>
+              
+                <option value="et" >
+                  eesti
+                </option>
+              
+                <option value="fr" selected>
+                  français
+                </option>
+              
+                <option value="id" >
+                  Bahasa Indonesia
+                </option>
+              
+                <option value="it" >
+                  italiano
+                </option>
+              
+                <option value="ja" >
+                  日本語
+                </option>
+              
+                <option value="nl" >
+                  Nederlands
+                </option>
+              
+                <option value="no" >
+                  norsk
+                </option>
+              
+                <option value="pl" >
+                  polski
+                </option>
+              
+                <option value="pt" >
+                  Português
+                </option>
+              
+                <option value="pt-br" >
+                  Português Brasileiro
+                </option>
+              
+                <option value="ro" >
+                  Română
+                </option>
+              
+                <option value="ru" >
+                  Русский
+                </option>
+              
+                <option value="sv" >
+                  svenska
+                </option>
+              
+                <option value="tr" >
+                  Türkçe
+                </option>
+              
+                <option value="uk" >
+                  Українська
+                </option>
+              
+                <option value="zh-hans" >
+                  简体中文
+                </option>
+              
+            </select>
+          </form>
+        </div>
+      </div>
+    </nav>
+
+    <div class="container">
+      
+  
+  <div class="row justify-content-md-center">
+    <div class="col-lg-8 col-centered">
+      
+        <div class="text-center">
+          <h1 class="main-title">
+            Rapports
+          </h1>
+          <h4>
+            
+              com.facebook.katana
+            
+          </h4>
+        </div>
+        <hr>
+        
+
+        <div class="container mb-4">
+          
+            
+              <br>
+              <div class="row position-relative">
+                <div class="col-3 col-sm-2 col-md-2 my-auto">
+                  <img src="/reports/777769/icon" width="50" height="50" class="rounded" alt="com.facebook.katana">
+                </div>
+                <div class="col-9 col-sm-10 col-md-10 text-truncate position-static">
+                  <div>
+                    <a href="/fr/reports/777787/" class="stretched-link report-link">
+                      
+                        Open in %1$s
+                      
+                    </a>
+                  </div>
+                  <div class="small"><b>Version 577.0.0.50.72 - google</b></div>
+                  <div>
+                    
+                      <span class="mr-lg-4 mr-2">
+                        <span class="badge badge-pill badge-danger reports">9</span>
+                        pisteurs
+                      </span>
+                    
+                    
+                      <span>
+                        <span class="badge badge-pill badge-danger reports">92</span>
+                        permissions
+                      </span>
+                    
+                  </div>
+                </div>
+              </div>
+            
+          
+            
+              <br>
+              <div class="row position-relative">
+                <div class="col-3 col-sm-2 col-md-2 my-auto">
+                  <img src="/reports/777625/icon" width="50" height="50" class="rounded" alt="com.facebook.katana">
+                </div>
+                <div class="col-9 col-sm-10 col-md-10 text-truncate position-static">
+                  <div>
+                    <a href="/fr/reports/777643/" class="stretched-link report-link">
+                      
+                        Open in app
+                      
+                    </a>
+                  </div>
+                  <div class="small"><b>Version 576.0.0.42.73 - google</b></div>
+                  <div>
+                    
+                      <span class="mr-lg-4 mr-2">
+                        <span class="badge badge-pill badge-danger reports">9</span>
+                        pisteurs
+                      </span>
+                    
+                    
+                      <span>
+                        <span class="badge badge-pill badge-danger reports">92</span>
+                        permissions
+                      </span>
+                    
+                  </div>
+                </div>
+              </div>
+            
+          
+            
+              <br>
+              <div class="row position-relative">
+                <div class="col-3 col-sm-2 col-md-2 my-auto">
+                  <img src="/reports/775033/icon" width="50" height="50" class="rounded" alt="com.facebook.katana">
+                </div>
+                <div class="col-9 col-sm-10 col-md-10 text-truncate position-static">
+                  <div>
+                    <a href="/fr/reports/775051/" class="stretched-link report-link">
+                      
+                        Open in app
+                      
+                    </a>
+                  </div>
+                  <div class="small"><b>Version 576.0.0.42.73 - google</b></div>
+                  <div>
+                    
+                      <span class="mr-lg-4 mr-2">
+                        <span class="badge badge-pill badge-danger reports">9</span>
+                        pisteurs
+                      </span>
+                    
+                    
+                      <span>
+                        <span class="badge badge-pill badge-danger reports">92</span>
+                        permissions
+                      </span>
+                    
+                  </div>
+                </div>
+              </div>
+            
+          
+            
+              <br>
+              <div class="row position-relative">
+                <div class="col-3 col-sm-2 col-md-2 my-auto">
+                  <img src="/reports/774984/icon" width="50" height="50" class="rounded" alt="com.facebook.katana">
+                </div>
+                <div class="col-9 col-sm-10 col-md-10 text-truncate position-static">
+                  <div>
+                    <a href="/fr/reports/775002/" class="stretched-link report-link">
+                      
+                        Open in app
+                      
+                    </a>
+                  </div>
+                  <div class="small"><b>Version 576.0.0.42.73 - google</b></div>
+                  <div>
+                    
+                      <span class="mr-lg-4 mr-2">
+                        <span class="badge badge-pill badge-danger reports">9</span>
+                        pisteurs
+                      </span>
+                    
+                    
+                      <span>
+                        <span class="badge badge-pill badge-danger reports">92</span>
+                        permissions
+                      </span>
+                    
+                  </div>
+                </div>
+              </div>
+            
+          
+            
+              <br>
+              <div class="row position-relative">
+                <div class="col-3 col-sm-2 col-md-2 my-auto">
+                  <img src="/reports/774664/icon" width="50" height="50" class="rounded" alt="com.facebook.katana">
+                </div>
+                <div class="col-9 col-sm-10 col-md-10 text-truncate position-static">
+                  <div>
+                    <a href="/fr/reports/774682/" class="stretched-link report-link">
+                      
+                        Open in %1$s
+                      
+                    </a>
+                  </div>
+                  <div class="small"><b>Version 575.1.0.55.73 - google</b></div>
+                  <div>
+                    
+                      <span class="mr-lg-4 mr-2">
+                        <span class="badge badge-pill badge-danger reports">9</span>
+                        pisteurs
+                      </span>
+                    
+                    
+                      <span>
+                        <span class="badge badge-pill badge-danger reports">92</span>
+                        permissions
+                      </span>
+                    
+                  </div>
+                </div>
+              </div>
+            
+          
+            
+              <br>
+              <div class="row position-relative">
+                <div class="col-3 col-sm-2 col-md-2 my-auto">
+                  <img src="/reports/774234/icon" width="50" height="50" class="rounded" alt="com.facebook.katana">
+                </div>
+                <div class="col-9 col-sm-10 col-md-10 text-truncate position-static">
+                  <div>
+                    <a href="/fr/reports/774252/" class="stretched-link report-link">
+                      
+                        Open in app
+                      
+                    </a>
+                  </div>
+                  <div class="small"><b>Version 576.0.0.42.73 - google</b></div>
+                  <div>
+                    
+                      <span class="mr-lg-4 mr-2">
+                        <span class="badge badge-pill badge-danger reports">9</span>
+                        pisteurs
+                      </span>
+                    
+                    
+                      <span>
+                        <span class="badge badge-pill badge-danger reports">92</span>
+                        permissions
+                      </span>
+                    
+                  </div>
+                </div>
+              </div>
+            
+          
+            
+              <br>
+              <div class="row position-relative">
+                <div class="col-3 col-sm-2 col-md-2 my-auto">
+                  <img src="/reports/774157/icon" width="50" height="50" class="rounded" alt="com.facebook.katana">
+                </div>
+                <div class="col-9 col-sm-10 col-md-10 text-truncate position-static">
+                  <div>
+                    <a href="/fr/reports/774175/" class="stretched-link report-link">
+                      
+                        Open in app
+                      
+                    </a>
+                  </div>
+                  <div class="small"><b>Version 576.0.0.42.73 - google</b></div>
+                  <div>
+                    
+                      <span class="mr-lg-4 mr-2">
+                        <span class="badge badge-pill badge-danger reports">9</span>
+                        pisteurs
+                      </span>
+                    
+                    
+                      <span>
+                        <span class="badge badge-pill badge-danger reports">92</span>
+                        permissions
+                      </span>
+                    
+                  </div>
+                </div>
+              </div>
+            
+          
+            
+              <br>
+              <div class="row position-relative">
+                <div class="col-3 col-sm-2 col-md-2 my-auto">
+                  <img src="/reports/771703/icon" width="50" height="50" class="rounded" alt="com.facebook.katana">
+                </div>
+                <div class="col-9 col-sm-10 col-md-10 text-truncate position-static">
+                  <div>
+                    <a href="/fr/reports/771721/" class="stretched-link report-link">
+                      
+                        Open in %1$s
+                      
+                    </a>
+                  </div>
+                  <div class="small"><b>Version 575.1.0.55.73 - google</b></div>
+                  <div>
+                    
+                      <span class="mr-lg-4 mr-2">
+                        <span class="badge badge-pill badge-danger reports">9</span>
+                        pisteurs
+                      </span>
+                    
+                    
+                      <span>
+                        <span class="badge badge-pill badge-danger reports">92</span>
+                        permissions
+                      </span>
+                    
+                  </div>
+                </div>
+              </div>
+            
+          
+            
+              <br>
+              <div class="row position-relative">
+                <div class="col-3 col-sm-2 col-md-2 my-auto">
+                  <img src="/reports/771420/icon" width="50" height="50" class="rounded" alt="com.facebook.katana">
+                </div>
+                <div class="col-9 col-sm-10 col-md-10 text-truncate position-static">
+                  <div>
+                    <a href="/fr/reports/771438/" class="stretched-link report-link">
+                      
+                        Open in %1$s
+                      
+                    </a>
+                  </div>
+                  <div class="small"><b>Version 575.0.0.45.73 - google</b></div>
+                  <div>
+                    
+                      <span class="mr-lg-4 mr-2">
+                        <span class="badge badge-pill badge-danger reports">9</span>
+                        pisteurs
+                      </span>
+                    
+                    
+                      <span>
+                        <span class="badge badge-pill badge-danger reports">92</span>
+                        permissions
+                      </span>
+                    
+                  </div>
+                </div>
+              </div>
+            
+          
+            
+              <br>
+              <div class="row position-relative">
+                <div class="col-3 col-sm-2 col-md-2 my-auto">
+                  <img src="/reports/771296/icon" width="50" height="50" class="rounded" alt="com.facebook.katana">
+                </div>
+                <div class="col-9 col-sm-10 col-md-10 text-truncate position-static">
+                  <div>
+                    <a href="/fr/reports/771314/" class="stretched-link report-link">
+                      
+                        Open in %1$s
+                      
+                    </a>
+                  </div>
+                  <div class="small"><b>Version 575.0.0.45.73 - google</b></div>
+                  <div>
+                    
+                      <span class="mr-lg-4 mr-2">
+                        <span class="badge badge-pill badge-danger reports">9</span>
+                        pisteurs
+                      </span>
+                    
+                    
+                      <span>
+                        <span class="badge badge-pill badge-danger reports">92</span>
+                        permissions
+                      </span>
+                    
+                  </div>
+                </div>
+              </div>
+            
+          
+            
+              <br>
+              <div class="row position-relative">
+                <div class="col-3 col-sm-2 col-md-2 my-auto">
+                  <img src="/reports/771003/icon" width="50" height="50" class="rounded" alt="com.facebook.katana">
+                </div>
+                <div class="col-9 col-sm-10 col-md-10 text-truncate position-static">
+                  <div>
+                    <a href="/fr/reports/771021/" class="stretched-link report-link">
+                      
+                        Open in %1$s
+                      
+                    </a>
+                  </div>
+                  <div class="small"><b>Version 575.0.0.45.73 - google</b></div>
+                  <div>
+                    
+                      <span class="mr-lg-4 mr-2">
+                        <span class="badge badge-pill badge-danger reports">9</span>
+                        pisteurs
+                      </span>
+                    
+                    
+                      <span>
+                        <span class="badge badge-pill badge-danger reports">92</span>
+                        permissions
+                      </span>
+                    
+                  </div>
+                </div>
+              </div>
+            
+          
+            
+              <br>
+              <div class="row position-relative">
+                <div class="col-3 col-sm-2 col-md-2 my-auto">
+                  <img src="/reports/770151/icon" width="50" height="50" class="rounded" alt="com.facebook.katana">
+                </div>
+                <div class="col-9 col-sm-10 col-md-10 text-truncate position-static">
+                  <div>
+                    <a href="/fr/reports/770169/" class="stretched-link report-link">
+                      
+                        Open in %1$s
+                      
+                    </a>
+                  </div>
+                  <div class="small"><b>Version 574.0.0.40.71 - google</b></div>
+                  <div>
+                    
+                      <span class="mr-lg-4 mr-2">
+                        <span class="badge badge-pill badge-danger reports">9</span>
+                        pisteurs
+                      </span>
+                    
+                    
+                      <span>
+                        <span class="badge badge-pill badge-danger reports">92</span>
+                        permissions
+                      </span>
+                    
+                  </div>
+                </div>
+              </div>
+            
+          
+            
+              <br>
+              <div class="row position-relative">
+                <div class="col-3 col-sm-2 col-md-2 my-auto">
+                  <img src="/reports/769724/icon" width="50" height="50" class="rounded" alt="com.facebook.katana">
+                </div>
+                <div class="col-9 col-sm-10 col-md-10 text-truncate position-static">
+                  <div>
+                    <a href="/fr/reports/769742/" class="stretched-link report-link">
+                      
+                        Open in %1$s
+                      
+                    </a>
+                  </div>
+                  <div class="small"><b>Version 574.0.0.40.71 - google</b></div>
+                  <div>
+                    
+                      <span class="mr-lg-4 mr-2">
+                        <span class="badge badge-pill badge-danger reports">9</span>
+                        pisteurs
+                      </span>
+                    
+                    
+                      <span>
+                        <span class="badge badge-pill badge-danger reports">92</span>
+                        permissions
+                      </span>
+                    
+                  </div>
+                </div>
+              </div>
+            
+          
+            
+              <br>
+              <div class="row position-relative">
+                <div class="col-3 col-sm-2 col-md-2 my-auto">
+                  <img src="/reports/769704/icon" width="50" height="50" class="rounded" alt="com.facebook.katana">
+                </div>
+                <div class="col-9 col-sm-10 col-md-10 text-truncate position-static">
+                  <div>
+                    <a href="/fr/reports/769722/" class="stretched-link report-link">
+                      
+                        Open in %1$s
+                      
+                    </a>
+                  </div>
+                  <div class="small"><b>Version 574.0.0.40.71 - google</b></div>
+                  <div>
+                    
+                      <span class="mr-lg-4 mr-2">
+                        <span class="badge badge-pill badge-danger reports">9</span>
+                        pisteurs
+                      </span>
+                    
+                    
+                      <span>
+                        <span class="badge badge-pill badge-danger reports">92</span>
+                        permissions
+                      </span>
+                    
+                  </div>
+                </div>
+              </div>
+            
+          
+            
+              <br>
+              <div class="row position-relative">
+                <div class="col-3 col-sm-2 col-md-2 my-auto">
+                  <img src="/reports/768844/icon" width="50" height="50" class="rounded" alt="com.facebook.katana">
+                </div>
+                <div class="col-9 col-sm-10 col-md-10 text-truncate position-static">
+                  <div>
+                    <a href="/fr/reports/768862/" class="stretched-link report-link">
+                      
+                        Open in %1$s
+                      
+                    </a>
+                  </div>
+                  <div class="small"><b>Version 574.0.0.40.71 - google</b></div>
+                  <div>
+                    
+                      <span class="mr-lg-4 mr-2">
+                        <span class="badge badge-pill badge-danger reports">9</span>
+                        pisteurs
+                      </span>
+                    
+                    
+                      <span>
+                        <span class="badge badge-pill badge-danger reports">92</span>
+                        permissions
+                      </span>
+                    
+                  </div>
+                </div>
+              </div>
+            
+          
+            
+              <br>
+              <div class="row position-relative">
+                <div class="col-3 col-sm-2 col-md-2 my-auto">
+                  <img src="/reports/741269/icon" width="50" height="50" class="rounded" alt="com.facebook.katana">
+                </div>
+                <div class="col-9 col-sm-10 col-md-10 text-truncate position-static">
+                  <div>
+                    <a href="/fr/reports/741287/" class="stretched-link report-link">
+                      
+                        @7F1400C5
+                      
+                    </a>
+                  </div>
+                  <div class="small"><b>Version 560.0.0.57.63 - google</b></div>
+                  <div>
+                    
+                      <span class="mr-lg-4 mr-2">
+                        <span class="badge badge-pill badge-danger reports">9</span>
+                        pisteurs
+                      </span>
+                    
+                    
+                      <span>
+                        <span class="badge badge-pill badge-danger reports">91</span>
+                        permissions
+                      </span>
+                    
+                  </div>
+                </div>
+              </div>
+            
+          
+            
+              <br>
+              <div class="row position-relative">
+                <div class="col-3 col-sm-2 col-md-2 my-auto">
+                  <img src="/reports/740495/icon" width="50" height="50" class="rounded" alt="com.facebook.katana">
+                </div>
+                <div class="col-9 col-sm-10 col-md-10 text-truncate position-static">
+                  <div>
+                    <a href="/fr/reports/740513/" class="stretched-link report-link">
+                      
+                        Link not saved
+                      
+                    </a>
+                  </div>
+                  <div class="small"><b>Version 561.0.0.42.67 - google</b></div>
+                  <div>
+                    
+                      <span class="mr-lg-4 mr-2">
+                        <span class="badge badge-pill badge-danger reports">9</span>
+                        pisteurs
+                      </span>
+                    
+                    
+                      <span>
+                        <span class="badge badge-pill badge-danger reports">91</span>
+                        permissions
+                      </span>
+                    
+                  </div>
+                </div>
+              </div>
+            
+          
+            
+              <br>
+              <div class="row position-relative">
+                <div class="col-3 col-sm-2 col-md-2 my-auto">
+                  <img src="/reports/737940/icon" width="50" height="50" class="rounded" alt="com.facebook.katana">
+                </div>
+                <div class="col-9 col-sm-10 col-md-10 text-truncate position-static">
+                  <div>
+                    <a href="/fr/reports/737958/" class="stretched-link report-link">
+                      
+                        @7F1400C5
+                      
+                    </a>
+                  </div>
+                  <div class="small"><b>Version 560.0.0.57.63 - google</b></div>
+                  <div>
+                    
+                      <span class="mr-lg-4 mr-2">
+                        <span class="badge badge-pill badge-danger reports">9</span>
+                        pisteurs
+                      </span>
+                    
+                    
+                      <span>
+                        <span class="badge badge-pill badge-danger reports">91</span>
+                        permissions
+                      </span>
+                    
+                  </div>
+                </div>
+              </div>
+            
+          
+            
+              <br>
+              <div class="row position-relative">
+                <div class="col-3 col-sm-2 col-md-2 my-auto">
+                  <img src="/reports/737764/icon" width="50" height="50" class="rounded" alt="com.facebook.katana">
+                </div>
+                <div class="col-9 col-sm-10 col-md-10 text-truncate position-static">
+                  <div>
+                    <a href="/fr/reports/737782/" class="stretched-link report-link">
+                      
+                        @7F1400C5
+                      
+                    </a>
+                  </div>
+                  <div class="small"><b>Version 560.0.0.57.63 - google</b></div>
+                  <div>
+                    
+                      <span class="mr-lg-4 mr-2">
+                        <span class="badge badge-pill badge-danger reports">9</span>
+                        pisteurs
+                      </span>
+                    
+                    
+                      <span>
+                        <span class="badge badge-pill badge-danger reports">91</span>
+                        permissions
+                      </span>
+                    
+                  </div>
+                </div>
+              </div>
+            
+          
+            
+              <br>
+              <div class="row position-relative">
+                <div class="col-3 col-sm-2 col-md-2 my-auto">
+                  <img src="/reports/737482/icon" width="50" height="50" class="rounded" alt="com.facebook.katana">
+                </div>
+                <div class="col-9 col-sm-10 col-md-10 text-truncate position-static">
+                  <div>
+                    <a href="/fr/reports/737500/" class="stretched-link report-link">
+                      
+                        @7F1400C5
+                      
+                    </a>
+                  </div>
+                  <div class="small"><b>Version 560.0.0.57.63 - google</b></div>
+                  <div>
+                    
+                      <span class="mr-lg-4 mr-2">
+                        <span class="badge badge-pill badge-danger reports">9</span>
+                        pisteurs
+                      </span>
+                    
+                    
+                      <span>
+                        <span class="badge badge-pill badge-danger reports">91</span>
+                        permissions
+                      </span>
+                    
+                  </div>
+                </div>
+              </div>
+            
+          
+            
+              <br>
+              <div class="row position-relative">
+                <div class="col-3 col-sm-2 col-md-2 my-auto">
+                  <img src="/reports/737475/icon" width="50" height="50" class="rounded" alt="com.facebook.katana">
+                </div>
+                <div class="col-9 col-sm-10 col-md-10 text-truncate position-static">
+                  <div>
+                    <a href="/fr/reports/737493/" class="stretched-link report-link">
+                      
+                        @7F1400C5
+                      
+                    </a>
+                  </div>
+                  <div class="small"><b>Version 560.0.0.57.63 - google</b></div>
+                  <div>
+                    
+                      <span class="mr-lg-4 mr-2">
+                        <span class="badge badge-pill badge-danger reports">9</span>
+                        pisteurs
+                      </span>
+                    
+                    
+                      <span>
+                        <span class="badge badge-pill badge-danger reports">91</span>
+                        permissions
+                      </span>
+                    
+                  </div>
+                </div>
+              </div>
+            
+          
+            
+              <br>
+              <div class="row position-relative">
+                <div class="col-3 col-sm-2 col-md-2 my-auto">
+                  <img src="/reports/737309/icon" width="50" height="50" class="rounded" alt="com.facebook.katana">
+                </div>
+                <div class="col-9 col-sm-10 col-md-10 text-truncate position-static">
+                  <div>
+                    <a href="/fr/reports/737327/" class="stretched-link report-link">
+                      
+                        @7F1400C6
+                      
+                    </a>
+                  </div>
+                  <div class="small"><b>Version 559.1.0.52.72 - google</b></div>
+                  <div>
+                    
+                      <span class="mr-lg-4 mr-2">
+                        <span class="badge badge-pill badge-danger reports">9</span>
+                        pisteurs
+                      </span>
+                    
+                    
+                      <span>
+                        <span class="badge badge-pill badge-danger reports">91</span>
+                        permissions
+                      </span>
+                    
+                  </div>
+                </div>
+              </div>
+            
+          
+            
+              <br>
+              <div class="row position-relative">
+                <div class="col-3 col-sm-2 col-md-2 my-auto">
+                  <img src="/reports/737228/icon" width="50" height="50" class="rounded" alt="com.facebook.katana">
+                </div>
+                <div class="col-9 col-sm-10 col-md-10 text-truncate position-static">
+                  <div>
+                    <a href="/fr/reports/737246/" class="stretched-link report-link">
+                      
+                        @7F1400C5
+                      
+                    </a>
+                  </div>
+                  <div class="small"><b>Version 560.0.0.57.63 - google</b></div>
+                  <div>
+                    
+                      <span class="mr-lg-4 mr-2">
+                        <span class="badge badge-pill badge-danger reports">9</span>
+                        pisteurs
+                      </span>
+                    
+                    
+                      <span>
+                        <span class="badge badge-pill badge-danger reports">91</span>
+                        permissions
+                      </span>
+                    
+                  </div>
+                </div>
+              </div>
+            
+          
+            
+              <br>
+              <div class="row position-relative">
+                <div class="col-3 col-sm-2 col-md-2 my-auto">
+                  <img src="/reports/736545/icon" width="50" height="50" class="rounded" alt="com.facebook.katana">
+                </div>
+                <div class="col-9 col-sm-10 col-md-10 text-truncate position-static">
+                  <div>
+                    <a href="/fr/reports/736563/" class="stretched-link report-link">
+                      
+                        @7F1400C6
+                      
+                    </a>
+                  </div>
+                  <div class="small"><b>Version 559.1.0.52.72 - google</b></div>
+                  <div>
+                    
+                      <span class="mr-lg-4 mr-2">
+                        <span class="badge badge-pill badge-danger reports">9</span>
+                        pisteurs
+                      </span>
+                    
+                    
+                      <span>
+                        <span class="badge badge-pill badge-danger reports">91</span>
+                        permissions
+                      </span>
+                    
+                  </div>
+                </div>
+              </div>
+            
+          
+            
+              <br>
+              <div class="row position-relative">
+                <div class="col-3 col-sm-2 col-md-2 my-auto">
+                  <img src="/reports/734406/icon" width="50" height="50" class="rounded" alt="com.facebook.katana">
+                </div>
+                <div class="col-9 col-sm-10 col-md-10 text-truncate position-static">
+                  <div>
+                    <a href="/fr/reports/734424/" class="stretched-link report-link">
+                      
+                        @7F1400C4
+                      
+                    </a>
+                  </div>
+                  <div class="small"><b>Version 558.0.0.70.72 - google</b></div>
+                  <div>
+                    
+                      <span class="mr-lg-4 mr-2">
+                        <span class="badge badge-pill badge-danger reports">9</span>
+                        pisteurs
+                      </span>
+                    
+                    
+                      <span>
+                        <span class="badge badge-pill badge-danger reports">91</span>
+                        permissions
+                      </span>
+                    
+                  </div>
+                </div>
+              </div>
+            
+          
+        </div>
+
+        <div>
+          
+
+<ul class="pagination pagination-sm justify-content-center">
+  
+    <li class="page-item disabled">
+      <a class="page-link" href="#">Premier</a>
+    </li>
+    <li class="page-item disabled">
+      <a class="page-link" href="#">Précédent</a>
+    </li>
+  
+  
+    
+      
+        <li class="page-item active">
+          <a class="page-link" href="?page=1">1</a>
+        </li>
+      
+    
+  
+    
+      
+        <li class="page-item">
+          <a class="page-link" href="?page=2">2</a>
+        </li>
+      
+    
+  
+    
+      
+        <li class="page-item">
+          <a class="page-link" href="?page=3">3</a>
+        </li>
+      
+    
+  
+    
+      
+        <li class="page-item">
+          <a class="page-link" href="?page=4">4</a>
+        </li>
+      
+    
+  
+    
+      
+        <li class="page-item">
+          <a class="page-link" href="?page=5">5</a>
+        </li>
+      
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+  
+    <li class="page-item">
+      <a class="page-link" href="?page=2">Suivant</a>
+    </li>
+    <li class="page-item">
+      <a class="page-link" href="?page=12">Dernier</a>
+    </li>
+  
+</ul>
+
+        </div>
+      
+    </div>
+  </div>
+
+    </div>
+    <script>
+      $(function () {
+        $('[data-toggle="tooltip"]').tooltip()
+      })
+    </script>
+    
+    
+  </body>
+
+</html>
